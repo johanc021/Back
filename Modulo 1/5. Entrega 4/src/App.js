@@ -27,12 +27,26 @@ app.use('/api/add-to-cart', cartRoutes)
 app.use('/api/carts', cartRoutes)
 app.use('/api/realtimeproducts', wsRoutes)
 
-/* socketServer.on('connection', socket => {
+
+/* const products = [{ id: 1, nombre: "Producto 1" }, { id: 2, nombre: "Producto 2" }]; */
+const products = [];
+
+socketServer.on('connection', socket => {
     console.log('Nuevo Cliente con id # ' + socket.id)
+
+
+    socket.on('addProduct', (newProduct) => {
+        // Agregar el nuevo producto a la lista de productos existente
+        products.push(newProduct);
+        // Emitir la lista actualizada de productos a todos los clientes conectados
+        socket.emit('updateProducts', products);
+    });
+
+
     socket.on('message', data => {
         console.log(data)
     })
-    socket.emit('evento_para_socket', "mensaje para que lo reciba socket cliente")
-}) */
+    socket.emit('updateProducts', { products })
+})
 
 export { app, socketServer };
