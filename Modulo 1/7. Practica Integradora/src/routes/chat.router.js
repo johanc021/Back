@@ -2,7 +2,7 @@ import Router from 'express'
 import Chats from '../dao/dbManagers/chats.js';
 
 
-const chatsManager = new Chats('./Chats');
+const chatsManager = new Chats('./chats');
 
 
 const router = Router();
