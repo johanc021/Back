@@ -20,6 +20,14 @@ router.post('/', async (req, res) => {
     res.send({ status: "success", payload: result })
 })
 
+router.delete('/:idProduct', async (req, res) => {
+    let { idProduct } = req.params
+
+    await cartManager.deleteProductByIdFromCart(idProduct)
+
+    res.send({ message: "Producto eliminado del carrito" })
+})
+
 
 
 

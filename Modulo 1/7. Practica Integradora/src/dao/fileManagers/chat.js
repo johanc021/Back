@@ -17,3 +17,4 @@ export const saveJSON = (result) => {
         fs.writeFileSync('chats.json', JSON.stringify([result]), 'utf8');
     }
 }
+
