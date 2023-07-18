@@ -1,0 +1,49 @@
+import { Router } from 'express';
+
+import Products from '../dao/dbManagers/products.js'
+import Carts from '../dao/dbManagers/carts.js'
+import Chats from '../dao/dbManagers/chats.js'
+
+const productManager = new Products();
+const cartManager = new Carts();
+const chatManager = new Chats()
+
+const router = Router();
+
+/* router.get('/products', async (req, res) => {
+    let products = await productManager.getAll();
+    console.log(products)
+    res.render('products', { products })
+}) */
+
+router.get('/products', async (req, res) => {
+    const { page = 1 } = req.query;
+
+    try {
+        const result = await productManager.getAll(page, 5);
+        const { docs, hasPrevPage, hasNextPage, prevPage, nextPage } = result;
+
+        res.render('products', {
+            products: docs,
+            hasPrevPage,
+            hasNextPage,
+            prevPage,
+            nextPage
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener los productos.' });
+    }
+});
+
+router.get('/carts', async (req, res) => {
+    let carts = await cartManager.getAll();
+    console.log(carts)
+    res.render('carts', { carts })
+})
+
+router.get('/chat', async (req, res) => {
+    let chats = await chatManager.getAll()
+    res.render('chat', { chats })
+})
+
+export default router;
