@@ -73,14 +73,23 @@ router.put('/:cid/products/:pid', async (req, res) => {
     }
 });
 
+// lleve la peticion a views.router.js
 
-//filtrando productos
+/* router.get('/:cid', async (req, res) => {
+    const cartId = req.params.cid;
 
-/* router.get('/', async (req, res) => {
+    const cart = await cartManager.getCart(cartId);
+    //console.log(cart)
+    //res.json({ status: "El carrito", payload: cart })
 
-}) */
-
-
+    if (!cart) {
+        // Si no se encuentra el carrito, se devuelve un mensaje de error o se redirige a una página de error
+        res.status(404).json({ error: 'Carrito no encontrado' });
+    } else {
+        // Renderizar la vista de carrito con los productos del carrito específico
+        res.render('cart', { cart });
+    }
+}); */
 
 
 export default router;

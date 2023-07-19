@@ -8,11 +8,21 @@ export default class Carts {
     }
 
 
-    getAll = async () => {
+    /* getAll = async () => {
         let carts = await cartModel.find().lean()
-        /* console.log(products) */
+  
         return carts
-    }
+    } */
+
+    getAll = async () => {
+        let carts = await cartModel.find().populate('products.product').lean();
+        return carts;
+    };
+
+    getCart = async (cartId) => {
+        const cart = await cartModel.findById(cartId).populate('products.product').lean();
+        return cart;
+    };
 
     deleteProductByIdFromCart = async (cartId, productId) => {
         try {

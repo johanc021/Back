@@ -3,9 +3,15 @@
 </div>
 
 {{#each carts}}
-    <p>id carrito: {{this._id}}</p>
-    {{#each products}}
-        <p>{{this.title}}</p>
-        <p>{{this.description}}</p>
+<div class="cart">
+    <p>Id carrito: {{this._id}}</p>
+    <h5>Productos:</h5>
+    {{#each this.products}}
+    <div class="product">
+        <p>Título: {{this.product.title}}</p>
+        <p>Descripción: {{this.product.description}}</p>
+        <!-- Mostrar otras propiedades del producto según sea necesario -->
+    </div>
     {{/each}}
+</div>
 {{/each}}

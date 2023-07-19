@@ -37,13 +37,29 @@ router.get('/products', async (req, res) => {
 
 router.get('/carts', async (req, res) => {
     let carts = await cartManager.getAll();
-    console.log(carts)
-    res.render('carts', { carts })
-})
+    console.log(carts);
+    res.render('carts', { carts });
+});
 
 router.get('/chat', async (req, res) => {
     let chats = await chatManager.getAll()
     res.render('chat', { chats })
 })
+
+router.get('/carts/:cid', async (req, res) => {
+    const cartId = req.params.cid;
+
+    const cart = await cartManager.getCart(cartId);
+    //console.log(cart)
+    //res.json({ status: "El carrito", payload: cart })
+
+    if (!cart) {
+        // Si no se encuentra el carrito, se devuelve un mensaje de error o se redirige a una página de error
+        res.status(404).json({ error: 'Carrito no encontrado' });
+    } else {
+        // Renderizar la vista de carrito con los productos del carrito específico
+        res.render('cart', { cart });
+    }
+});
 
 export default router;
