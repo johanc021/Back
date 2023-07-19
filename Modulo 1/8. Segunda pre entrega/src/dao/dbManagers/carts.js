@@ -127,6 +127,23 @@ export default class Carts {
             return null;
         }
     };
+    // Dejar carrito vacio
+    deleteAllProductsFromCart = async (cartId) => {
+        try {
+            const cart = await cartModel.findById(cartId);
+
+            if (!cart) {
+                return null;
+            }
+
+            cart.products = [];
+            await cart.save();
+
+            return cart;
+        } catch (error) {
+            throw new Error('Error al eliminar los productos del carrito');
+        }
+    };
 
 
     /*  saveCart = async (idProduct, idCart) => {

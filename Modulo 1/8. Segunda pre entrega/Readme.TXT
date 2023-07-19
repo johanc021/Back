@@ -78,17 +78,70 @@ http://localhost:8090/carts - navegador
 Estructura por body - si hay un carrito creado proporcionar el idCart, si quiere un carrito nuevo solo ingresar el producto.
 
 {
-    "idCart": "64aca6b39a08d62597509b05",
-    "idProduct": "64ac8dca97ec6bd26f4f78f8"
+    "idCart": "64b6acc420ab4253c696d2fb",
+    "idProduct": "64b5f0ae4cff50135172ff2e",
+    "quantity": 15
 }
 
 --------------------------------------------------------
 
-Peticion PUT - Eliminar producto desde carrito
+Peticion Delete - Eliminar producto desde carrito
 
-http://localhost:8090/api/carts/:idProduct
+http://localhost:8090/api/carts/:cid/products/:pid
 
-Pasar id del producto para eliminar producto del carrito
+Se debe pasar el id del carrito y el id del producto.
+
+
+--------------------------------------------------------
+
+Peticion PUT - Actualizar productos de un carrito
+
+http://localhost:8090/api/carts/:cid
+
+
+Estructura por body - postman:
+
+{
+  "products": [
+    {
+      "product": "64b5f0ae4cff50135172ff30"
+    },
+    {
+      "product": "64b5f0ae4cff50135172ff22"
+    }
+  ]
+}
+
+--------------------------------------------------------
+
+Peticion PUT - Actualizar cantidad de un producto en carrito
+
+http://localhost:8090/api/carts/:cid/products/:pid
+
+Se debe pasar el id del carrito y del producto
+
+ademas pasar por body la estructura:
+
+{
+  "quantity": 10
+}
+
+
+--------------------------------------------------------
+
+Peticion GET - Obtener carrito y productos del carrito.
+
+http://localhost:8090/api/carts/:cid
+
+Se debe pasar el id del carrito.
+
+
+Peticion Delete - Vaciar carrito por id
+
+http://localhost:8090/api/carts/:cid
+
+
+se debe pasar el id del carrito para vaciarlo.
 
 
 -------------------------------------------------------
