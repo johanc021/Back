@@ -10,12 +10,6 @@ const chatManager = new Chats()
 
 const router = Router();
 
-/* router.get('/products', async (req, res) => {
-    let products = await productManager.getAll();
-    console.log(products)
-    res.render('products', { products })
-}) */
-
 router.get('/products', async (req, res) => {
     const { page = 1 } = req.query;
 
@@ -41,9 +35,9 @@ router.get('/carts', async (req, res) => {
     res.render('carts', { carts });
 });
 
-router.get('/chat', async (req, res) => {
-    let chats = await chatManager.getAll()
-    res.render('chat', { chats })
+router.get("/chat", async (req, res) => {
+    let messages = await chatManager.getAll()
+    res.render("chat", { messages })
 })
 
 router.get('/carts/:cid', async (req, res) => {

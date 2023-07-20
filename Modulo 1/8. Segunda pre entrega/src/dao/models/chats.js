@@ -4,7 +4,7 @@ const chatsCollection = 'chats'
 
 
 const chatsSchema = mongoose.Schema({
-    email: {
+    user: {
         type: String,
         required: true
     },
