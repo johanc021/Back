@@ -97,21 +97,20 @@ Pasar id del producto para eliminar producto del carrito
 
 Peticion GET - Obtener chats
 
-http://localhost:8090/api/chats - API
-http://localhost:8090/chats - Navegador
+http://localhost:8090/api/chat - API
+http://localhost:8090/chat - Navegador
 
--------------------------------------------------------
+---
 
 Enviar un mensaje
 
-http://localhost:8090/api/chats
-
+http://localhost:8090/api/chat
 
 Estructura por body
 
 {
-    "email": "facjohan@hotmail.com",
-    "message": "Muy bien y tu?"
+"user": "facjohan@hotmail.com",
+"message": "Muy bien y tu?"
 }
 
 

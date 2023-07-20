@@ -12,10 +12,10 @@ export default class Chats {
         return messages
     }
 
-    saveMessage = async message => {
-        let messages = await chatsModel.create(message)
-        saveJSON(messages)
-        return messages
+    saveMessages = async (user, message) => {
+        if (!user || !message) return ({ status: "error", error: "Faltan datos" })
+        let result = await chatsModel.create({ user, message })
+        saveJSON(result)
+        return result
     }
-
 }

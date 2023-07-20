@@ -22,9 +22,9 @@ router.get('/carts', async (req, res) => {
     res.render('carts', { carts })
 })
 
-router.get('/chat', async (req, res) => {
-    let chats = await chatManager.getAll()
-    res.render('chat', { chats })
+router.get("/chat", async (req, res) => {
+    let messages = await chatManager.getAll()
+    res.render("chat", { messages })
 })
 
 export default router;

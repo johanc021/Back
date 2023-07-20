@@ -15,7 +15,7 @@ export default class Chats {
     saveMessages = async (user, message) => {
         if (!user || !message) return ({ status: "error", error: "Faltan datos" })
         let result = await chatsModel.create({ user, message })
+        saveJSON(result)
         return result
     }
-
 }

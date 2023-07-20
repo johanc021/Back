@@ -6,7 +6,7 @@ import cartsRouter from './routes/cart.router.js'
 import chatsRouter from './routes/chat.router.js'
 import handlebars from 'express-handlebars'
 import mongoose from 'mongoose';
-/* import { Server } from 'socket.io' */
+import { Server } from 'socket.io'
 
 
 const app = express();
@@ -32,24 +32,16 @@ app.use('/', viewRouter)
 // rutas del router
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
-app.use('/api/chats', chatsRouter)
+app.use('/api/chat', chatsRouter)
 
 const server = app.listen(PORT, () => {
     console.log("Servidor levantado en http://localhost:8090")
 })
 
 
-/* const io = new Server(server)
+const socketServer = new Server(server)
 
-const messages = [];
-
-io.on('connection', socket => {
-    console.log("Hay usuarios conectados");
-
-    socket.on('message', data => {
-        messages.push(data)
-        io.emit('messageLogs', messages)
-        console.log(data)
-    })
-
-}) */
+socketServer.on("connection", socket => {
+    console.log("Nuevo cliente");
+})
+export default socketServer
