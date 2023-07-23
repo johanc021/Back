@@ -1,3 +1,20 @@
+Inicio de sesión:
+
+http://localhost:8090/login
+
+Usuario registrado -> adminCoder@coder.com
+Contraseña -> adminCod3r123
+
+---
+
+Cerrar Sesion:
+
+http://localhost:8090/profile
+
+Clickear sobre el boton de cerrar sesión
+
+---
+
 Para consultar los productos:
 
 Petición GET - Todos los productos
