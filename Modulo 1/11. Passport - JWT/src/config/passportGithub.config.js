@@ -16,7 +16,7 @@ const initPassportGithub = () => {
                     last_name: profile._json.family_name || '',
                     email: profile._json.email,
                     age: '',
-                    role: 'user standard',
+                    role: 'user',
                     password: ''
                 }
                 let result = await userModel.create(newUser)

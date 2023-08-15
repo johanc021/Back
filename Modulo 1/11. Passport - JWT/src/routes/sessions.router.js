@@ -5,6 +5,11 @@ import { SECRET_KEY } from "../utils.js";
 
 const router = Router();
 
+//en caso de que falle el registro
+router.get('/failRegister', async (req, res) => {
+    res.send({ error: "failed" })
+})
+
 // Registrar un usuario
 router.post('/register', (req, res, next) => {
     passport.authenticate('register', (err, user, info) => {
