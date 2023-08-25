@@ -53,6 +53,8 @@ router.get('/current', passport.authenticate('current', { session: false }), (re
     res.json({ payload: req.user });
 });
 
+
+
 //en caso de que falle el login
 router.get('/failLogin', async (req, res) => {
     res.send({ error: "failed" })
