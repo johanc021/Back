@@ -1,12 +1,12 @@
 import passport from "passport";
 import jwt from 'jsonwebtoken';
-import { SECRET_KEY } from "../utils.js";
+import { SECRET_KEY } from "../../utils.js";
+import { SaveSessionCurrentDTO } from "../dto/sessionCurrent.dto.js";
 
 class SessionsService {
     async register(req, res, next) {
         passport.authenticate('register', (err, user, info) => {
             if (err) {
-
                 return res.status(500).json({ error: err.message });
             }
             if (!user) {
@@ -35,6 +35,18 @@ class SessionsService {
         passport.authenticate('resetPassword', { failureRedirect: '/failResetPassword' })(req, res, () => {
             res.send({ status: "success", message: "Contraseña restaurada" });
         });
+    }
+
+    async current(req, res) {
+        try {
+            passport.authenticate('current', { session: false })(req, res, () => {
+                const sessionPayload = new SaveSessionCurrentDTO(req.user)
+                res.json({ payload: sessionPayload });
+            });
+        } catch (error) {
+            console.error('Error al obtener token:', error);
+            res.status(404).json({ status: 'error', error: 'Recurso no encontrado' });
+        }
     }
 
     async logout(req, res) {
