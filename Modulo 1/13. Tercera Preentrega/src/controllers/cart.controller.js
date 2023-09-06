@@ -88,8 +88,10 @@ class CartController {
 
             // Obtener el carrito y usuario autorizado
             const cart = await cartRepository.getCart(cid);
-            /* console.log(cart) */
-            const userIdAuthorized = await userRepository.getIdUserByEmail(user.email);
+
+            //obtener id del usuario
+            /* const userIdAuthorized = await userRepository.getIdUserByEmail(user.email);
+            userIdAuthorized._id.toString() */
 
             // Inicializar arreglos para productos comprados y no comprados
             const productsNotPurchased = [];
@@ -117,7 +119,7 @@ class CartController {
                 code: generateTicketCode(),
                 purchase_datetime: new Date(),
                 amount: Number(totalAmount), // Usar el monto total calculado
-                purchaser: userIdAuthorized,
+                purchaser: user.email,
             });
 
             for (const productItem of productsPurchased) {
