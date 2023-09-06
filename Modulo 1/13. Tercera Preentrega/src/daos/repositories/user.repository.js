@@ -42,6 +42,15 @@ export class UserRepository {
         }
     }
 
+    async getIdUserByEmail(email) {
+        try {
+            const result = await this.dao.getIdUserByEmail(email)
+            return result
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
     async deleteUser(userId) {
         try {
             const result = await this.dao.removeUser(userId);

@@ -249,8 +249,37 @@ Estructura por body
 Se implemento el token jwt y se agrego la ruta /current para validar el token
 Al iniciar sesion se crea el token, y con postman se puede probar al enviar lo siguiente:
 
+Petion POST - primero debe iniciar sesion
+
+http://localhost:8080/api/sessions/login
+
+estructura para enviar por postman
+
+{
+"email": "facjohan@hotmail.com",
+"password": "Coder1234"
+}
+
+---
+
+---
+
+---
+
 Peticion GET
 
 http://localhost:8080/api/sessions/current
 
 y enviar por headers una variable Authorization con value -> Bearer y el token
+
+---
+
+---
+
+---
+
+Peticion POST - Comprar carrito de compras
+
+Enviar por params el id del carrito
+
+http://localhost:8080/api/cart/:cid/purchase

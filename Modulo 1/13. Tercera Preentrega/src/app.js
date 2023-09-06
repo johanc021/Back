@@ -12,6 +12,7 @@ import initializedPassport from "./config/middlewareAuth/passport.middleware.js"
 import initPassportGithub from "./config//middlewareAuth/passportGithub.config.js";
 import cookieParser from 'cookie-parser'
 import env from './config/config.js'
+import cors from 'cors'
 
 const app = express();
 
@@ -51,6 +52,8 @@ app.use(cookieParser())
 // uso de json con postman
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use(cors())
 
 
 // rutas del router API - Navegador

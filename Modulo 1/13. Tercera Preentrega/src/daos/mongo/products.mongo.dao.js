@@ -55,6 +55,19 @@ export class ProductsMongoDAO {
         }
     };
 
+    async updateProductStock(productId, newStock) {
+        try {
+            const updatedProduct = await productModel.findByIdAndUpdate(
+                productId,
+                { $set: { stock: newStock } },
+                { new: true }
+            );
+            return updatedProduct;
+        } catch (error) {
+            throw new Error('Error al actualizar el stock del producto');
+        }
+    }
+
     deleteProduct = async (productId) => {
         try {
             const result = await productModel.findByIdAndDelete(productId);

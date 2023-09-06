@@ -18,6 +18,38 @@ export class CartsMongoDAO {
     };
 
     deleteProductByIdFromCart = async (cartId, productId) => {
+        console.log(cartId)
+        console.log(productId)
+        try {
+            const cart = await cartModel.findById(cartId);
+            console.log(cart)
+            if (!cart) {
+                console.log('No existe el carrito con el ID proporcionado.');
+                return null;
+            }
+
+            // Encuentra el índice del producto en el carrito
+            const productIndex = cart.products.findIndex(productItem => productItem.product._id.toString() === productId);
+
+            if (productIndex === -1) {
+                console.log('No se encontró el producto en el carrito.');
+                return null;
+            }
+
+            // Elimina el producto del carrito utilizando el índice encontrado
+            cart.products.splice(productIndex, 1);
+
+            await cart.save();
+
+            return cart;
+        } catch (error) {
+            console.log('Error al eliminar el producto del carrito:', error.message);
+            return null;
+        }
+    };
+
+
+    /* deleteProductByIdFromCart = async (cartId, productId) => {
         try {
             const cart = await cartModel.findById(cartId);
 
@@ -30,14 +62,14 @@ export class CartsMongoDAO {
             cart.products = updatedProducts;
 
             await cart.save();
-            /* saveJSON(cart); */
+
 
             return cart;
         } catch (error) {
             console.log('Error al eliminar el producto del carrito:', error.message);
             return null;
         }
-    };
+    }; */
 
     saveCart = async (idProduct, idCart, quantity) => {
 

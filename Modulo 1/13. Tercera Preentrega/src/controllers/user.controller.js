@@ -46,6 +46,15 @@ class userController {
             res.status(400).json({ error: error.message, status: STATUS.FAIL });
         }
     }
+    async getUserByEmail(req, res) {
+        try {
+            const emailUser = req.params.emailUser
+            const result = await userRepository.getUserByEmail(emailUser)
+            res.status(200).json({ result, status: STATUS.SUCCESS })
+        } catch (error) {
+            res.status(400).json({ error: error.message, status: STATUS.FAIL });
+        }
+    }
 
     async deleteUser(req, res) {
         const userId = req.params.uid;

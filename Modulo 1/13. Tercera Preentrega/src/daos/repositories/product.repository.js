@@ -43,6 +43,15 @@ export class ProductRepository {
         }
     }
 
+    async updateProductStock(productId, newStock) {
+        try {
+            const update = await this.dao.updateProductStock(productId, newStock)
+            return update
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    }
+
     async deleteProduct(productId) {
         try {
             const deleted = await this.dao.deleteProduct(productId);

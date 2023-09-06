@@ -46,6 +46,14 @@ export class UsersMongoDAO {
             throw new Error('Error al actualizar el usuario');
         }
     }
+    getIdUserByEmail = async (email) => {
+        try {
+            let result = await userModel.findOne({ email: email }).select('_id');
+            return result;
+        } catch (error) {
+            throw new Error('Error al obtener el usuario por Email');
+        }
+    }
 
     removeUser = async (userId) => {
         try {

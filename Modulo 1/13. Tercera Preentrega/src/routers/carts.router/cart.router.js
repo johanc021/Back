@@ -1,17 +1,19 @@
 import { Router } from 'express';
 import cartController from '../../controllers/cart.controller.js';
+import { authenticate } from '../../config/middlewareAuth/authAuthenticate/authenticate.js';
+import isUser from '../../config/middlewareAuth/authRole/isUser.js';
 
 class CartRouter {
     constructor() {
         this.router = Router();
-        this.router.get('/', cartController.getAllCarts);
-        this.router.get('/:cartId', cartController.getCart);
-        this.router.delete('/:cartId/products/:productId', cartController.deleteProductFromCart);
-        this.router.post('/', cartController.saveProductToCart);
-        this.router.put('/:cartId', cartController.updateCart);
-        this.router.put('/:cartId/products/:productId', cartController.updateProductQuantity);
-        this.router.post('/:cid/purchase', cartController.cartPurchase)
-        this.router.delete('/:cartId', cartController.deleteAllProductsFromCart);
+        this.router.get('/', authenticate, cartController.getAllCarts);
+        this.router.get('/:cartId', authenticate, cartController.getCart);
+        this.router.delete('/:cartId/products/:productId', authenticate, cartController.deleteProductFromCart);
+        this.router.post('/', authenticate, cartController.saveProductToCart);
+        this.router.put('/:cartId', authenticate, cartController.updateCart);
+        this.router.put('/:cartId/products/:productId', authenticate, cartController.updateProductQuantity);
+        this.router.delete('/:cartId', authenticate, cartController.deleteAllProductsFromCart);
+        this.router.post('/:cid/purchase', authenticate, cartController.purchaseCart)
 
     }
 

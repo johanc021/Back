@@ -22,9 +22,33 @@ const cookieExtractor = (req, res) => {
     return token
 }
 
+// para generar el ticket
+function generateTicketCode() {
+    const timestamp = Date.now();
+    const randomValue = Math.floor(Math.random() * 10000);
+    const ticketCode = `TICKET-${timestamp}-${randomValue}`;
+
+    return ticketCode;
+}
+//para calcular el valor total de compra
+function calculateTotalAmount(productsPurchased) {
+    // Calcula el monto total de la compra sumando el precio de los productos comprados
+    let totalAmount = 0;
+
+    for (const productItem of productsPurchased) {
+        const { product, quantity } = productItem;
+        // Suponiendo que cada elemento de productsPurchased tiene un campo "price" que representa el precio del producto
+        const productPrice = product.price;
+        totalAmount += productPrice * quantity;
+    }
+
+    return totalAmount;
+}
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-export { generateToken, cookieExtractor };
+export { generateToken, cookieExtractor, generateTicketCode, calculateTotalAmount };
 
 export default __dirname
