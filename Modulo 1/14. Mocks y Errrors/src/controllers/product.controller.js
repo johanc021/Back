@@ -1,5 +1,8 @@
 import { ProductRepository } from '../daos/repositories/product.repository.js';
 import { STATUS } from '../utils/constantes.js'
+import CustomError from '../utils/customErrors/customError.js';
+import { generateProductError } from '../utils/customErrors/info.js'
+import Error from '../utils/customErrors/enum.js';
 
 const productRepository = new ProductRepository()
 
@@ -28,10 +31,18 @@ class ProductController {
     async createProduct(req, res) {
         try {
             const product = req.body;
+            if (!product.title || !product.description || !product.code || !product.price || !product.status || !product.stock || !product.category || !product.thumbnail) {
+                CustomError.createError({
+                    name: "Error al crear el usuario",
+                    cause: generateProductError(product),
+                    message: "Error al crear el producto",
+                    code: Error.INVALID_TYPE_ERROR
+                })
+            }
             const createdProduct = await productRepository.createProduct(product);
             res.status(201).json({ createdProduct });
         } catch (error) {
-            res.status(400).json({ error: error.message });
+            res.status(400).json({ error: error.message, code: error.code, cause: error.cause, status: STATUS.FAIL });
         }
     }
 

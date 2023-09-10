@@ -13,6 +13,7 @@ import initPassportGithub from "./config//middlewareAuth/passportGithub.config.j
 import cookieParser from 'cookie-parser'
 import env from './config/config.js'
 import cors from 'cors'
+import middlewareErrors from './config/middlewareErrors/indexControlError.js'
 
 const app = express();
 
@@ -53,8 +54,11 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+// cors
 app.use(cors())
 
+// Middleware customErrors
+app.use(middlewareErrors)
 
 // rutas del router API - Navegador
 app.use('/api', appRouter)

@@ -1,5 +1,8 @@
 import { UserRepository } from '../daos/repositories/user.repository.js';
 import { STATUS } from '../utils/constantes.js'
+import CustomError from '../utils/customErrors/customError.js';
+import { generateUserError } from '../utils/customErrors/info.js'
+import Error from '../utils/customErrors/enum.js';
 
 const userRepository = new UserRepository()
 
@@ -18,11 +21,18 @@ class userController {
     async createUser(req, res) {
         try {
             const data = req.body;
+            if (!data.first_name || !data.last_name || !data.email || !data.age || !data.password) {
+                CustomError.createError({
+                    name: "Error al crear el usuario",
+                    cause: generateUserError(data),
+                    message: "Error al crear el usuario",
+                    code: Error.INVALID_TYPE_ERROR
+                })
+            }
             const result = await userRepository.createUser(data);
             res.status(201).json({ user: result, status: STATUS.SUCCESS });
         } catch (error) {
-            // Aquí capturas el error lanzado desde el servicio
-            res.status(400).json({ error: error.message, status: STATUS.FAIL });
+            res.status(400).json({ error: error.message, code: error.code, cause: error.cause, status: STATUS.FAIL });
         }
     }
 

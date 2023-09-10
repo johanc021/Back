@@ -5,7 +5,7 @@ import { authenticate } from '../../config/middlewareAuth/authAuthenticate/authe
 class ViewsRouter {
     constructor() {
         this.router = Router();
-        this.router.get('/home', viewsController.getHome)
+        this.router.get('/', viewsController.getHome)
         this.router.get('/register', viewsController.getRegister);
         this.router.get('/login', viewsController.getLogin);
         this.router.get('/resetPassword', viewsController.getResetPassword);
