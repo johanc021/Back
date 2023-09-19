@@ -299,3 +299,17 @@ Petición GET - Crear Mocks de productos
 http://localhost:8080/mockingproducts
 
 Se creara 500 productos en la base de datos
+
+---
+
+---
+
+---
+
+Peticion Get - Testeo de logger
+
+Abrir por navegador o postman
+
+http://localhost:8080/api/loggerTest
+
+debe crear los registros de acuerdo al logger
