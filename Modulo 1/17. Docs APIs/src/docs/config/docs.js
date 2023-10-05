@@ -6,7 +6,7 @@ const swaggerOptions = {
         openapi: "3.0.1",
         info: {
             title: 'Documentación de las APIs',
-            description: 'Información de las pets y usuarios',
+            description: 'Información de las End Points del proyecto ecommerce',
             version: '1.0.1',
             contact: {
                 name: 'Johan Castellanos',

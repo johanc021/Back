@@ -12,13 +12,9 @@ import initializedPassport from "./config/middlewareAuth/passport.middleware.js"
 import initPassportGithub from "./config//middlewareAuth/passportGithub.config.js";
 import cookieParser from 'cookie-parser'
 import config from "./config/config.js";
-/* import env from './config/config.js' */
 import cors from 'cors'
 import middlewareErrors from './config/middlewareErrors/indexControlError.js'
 import { addLogger } from "./utils/winston/logger.js";
-
-
-
 
 const app = express();
 

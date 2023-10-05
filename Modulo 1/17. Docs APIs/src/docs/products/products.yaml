@@ -126,7 +126,7 @@ paths:
                 example:
                   error: "Error en el servidor"
 
-  /api/products/{productId}:
+  /api/product/{productId}:
     parameters:
       - name: productId
         in: path

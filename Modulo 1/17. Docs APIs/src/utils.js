@@ -6,8 +6,6 @@ import config from "./config/config.js";
 
 export const createHast = password => bcrypt.hashSync(password, genSaltSync(10))
 
-export const isValidPassword = (user, password) => bcrypt.compareSync(password, user)
-
 export const isMatch = (passwordNew, passwordOld) => bcrypt.compareSync(passwordNew, passwordOld);
 
 const generateToken = (user) => {

@@ -56,6 +56,18 @@ paths:
                     description: Descripción del error
                 example:
                   error: "No está autorizado para acceder a este recurso"
+        '500':
+              description: Error en el servidor
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        description: Descripción del error
+                    example:
+                      error: "Error en el servidor"
 
     post:
       summary: Crea un nuevo carrito
@@ -128,6 +140,18 @@ paths:
                     description: Descripción del error
                 example:
                   error: "No tiene los permisos necesarios para acceder a este recurso"
+        '500':
+              description: Error en el servidor
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        description: Descripción del error
+                    example:
+                      error: "Error en el servidor"
 
   /api/cart/{cartId}:
     parameters:
@@ -178,6 +202,18 @@ paths:
                     description: Descripción del error
                 example:
                   error: "El carrito especificado no fue encontrado"
+        '500':
+              description: Error en el servidor
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        description: Descripción del error
+                    example:
+                      error: "Error en el servidor"
 
     put:
       summary: Actualiza un carrito por su ID
@@ -268,6 +304,18 @@ paths:
                     description: Descripción del error
                 example:
                   error: "El carrito especificado no fue encontrado"
+        '500':
+              description: Error en el servidor
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        description: Descripción del error
+                    example:
+                      error: "Error en el servidor"
 
     delete:
       summary: Elimina un carrito por su ID
@@ -335,6 +383,18 @@ paths:
                     description: Descripción del error
                 example:
                   error: "El carrito especificado no fue encontrado"
+        '500':
+              description: Error en el servidor
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        description: Descripción del error
+                    example:
+                      error: "Error en el servidor"
 
   /api/cart/{cartId}/products/{productId}:
     parameters:
@@ -416,6 +476,18 @@ paths:
                     description: Descripción del error
                 example:
                   error: "El producto o el carrito no fue encontrado"
+        '500':
+              description: Error en el servidor
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        description: Descripción del error
+                    example:
+                      error: "Error en el servidor"
 
     put:
       summary: Actualiza la cantidad de un producto en el carrito
@@ -490,6 +562,18 @@ paths:
                     description: Descripción del error
                 example:
                   error: "El producto o el carrito no fue encontrado"
+        '500':
+              description: Error en el servidor
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        description: Descripción del error
+                    example:
+                      error: "Error en el servidor"
 
   /api/cart/{cartId}/purchase:
     post:
@@ -552,6 +636,18 @@ paths:
                       description: Descripción del error
                   example:
                     error: "El carrito especificado no fue encontrado"
+          '500':
+              description: Error en el servidor
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                        description: Descripción del error
+                    example:
+                      error: "Error en el servidor"
 
 components:
   schemas:

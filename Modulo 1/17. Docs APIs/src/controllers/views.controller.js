@@ -18,9 +18,9 @@ class ViewsController {
         res.render('login');
     }
 
-    async getResetPassword(req, res) {
-        res.render('resetPassword');
-    }
+    /*   async getResetPassword(req, res) {
+          res.render('resetPassword');
+      } */
 
     async getResetPasswordMail(req, res) {
         res.render('resetPasswordMail');

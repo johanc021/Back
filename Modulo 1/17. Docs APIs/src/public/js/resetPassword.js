@@ -1,8 +1,8 @@
-const form = document.getElementById('resetPasswordForm');
+const formReset = document.getElementById('resetPasswordForm');
 
-form.addEventListener('submit', e => {
+formReset.addEventListener('submit', e => {
     e.preventDefault();
-    const data = new FormData(form);
+    const data = new FormData(formReset);
     const obj = {};
     data.forEach((value, key) => obj[key] = value);
     fetch('/api/sessions/resetPassword', {

@@ -1,9 +1,9 @@
-const form = document.getElementById('loginForm')
+const formLogin = document.getElementById('loginForm')
 
-form.addEventListener('submit', e => {
+formLogin.addEventListener('submit', e => {
     e.preventDefault();
 
-    const data = new FormData(form);
+    const data = new FormData(formLogin);
     const obj = {}
     data.forEach((value, key) => obj[key] = value);
 

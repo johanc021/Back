@@ -4,7 +4,7 @@ import config from "../../config/config.js";
 import { SaveSessionCurrentDTO } from "../dto/sessionCurrent.dto.js";
 import getDAOS from "../daos.factory.js";
 import MailingService from "../../services/mailing.js";
-import { generateResetPasswordToken, verifyToken, extractToken } from "../../utils/resetPassword.js";
+import { generateResetPasswordToken, verifyToken } from "../../utils/resetPassword.js";
 
 const { usersDAO } = getDAOS();
 

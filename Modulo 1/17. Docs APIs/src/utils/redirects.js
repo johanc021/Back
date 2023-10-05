@@ -1,3 +1,3 @@
-export const redirectToLogin = (req, res) => {
+export const redirectToLogin = (res) => {
     res.redirect('/login');
 }

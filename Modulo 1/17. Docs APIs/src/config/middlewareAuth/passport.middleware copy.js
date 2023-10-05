@@ -2,10 +2,11 @@ import passport from "passport";
 import passportJWT from "passport-jwt";
 import local from 'passport-local'
 import { cookieExtractor, createHast, isMatch } from "../../utils.js";
+import config from "../config.js";
 import userModel from '../../daos/schema/users.schema.js'
 import { SaveUserDTO } from "../../daos/dto/users.dto.js";
-import config from "../config.js";
 import { extractToken } from "../../utils/resetPassword.js";
+import { redirectToLogin } from "../../utils/redirects.js";
 
 const localStrategy = local.Strategy;
 const JwtStrategy = passportJWT.Strategy;
@@ -47,7 +48,6 @@ const initializedPassport = () => {
         if (user) {
           return done(null, false, { message: 'Correo electrónico ya registrado' });
         }
-
         const newUser = {
           first_name,
           last_name,
@@ -55,7 +55,6 @@ const initializedPassport = () => {
           age,
           password: createHast(password)
         };
-
         const userPayload = new SaveUserDTO(newUser)
         let result = await userModel.create(userPayload);
         return done(null, result);
@@ -67,13 +66,34 @@ const initializedPassport = () => {
 
   passport.use('login', new localStrategy(
     { passReqToCallback: true, usernameField: 'email' }, async (req, username, password, done) => {
-
       try {
         const user = await userModel.findOne({ email: username });
-
+        /* console.log(user.password) */
         if (!user) {
           return done(null, false, { message: 'Usuario no encontrado' });
         }
+        console.log(isMatch(password, user.password))
+        /* if (!isMatch(password, user.password)) {
+          return done(null, false, { message: 'Contraseña incorrecta' });
+        }
+        return done(null, user); */
+      } catch (error) {
+        return done(error);
+      }
+    }
+  ));
+
+  /* passport.use('login', new localStrategy(
+    { passReqToCallback: true, usernameField: 'email' }, async (req, username, password, done) => {
+      console.log(username)
+      console.log(password)
+      try {
+        const user = await userModel.findOne({ email: username });
+        console.log(user.password)
+        if (!user) {
+          return done(null, false, { message: 'Usuario no encontrado' });
+        }
+        console.log(isMatch(password, user.password))
         if (!isMatch(password, user.password)) {
           return done(null, false, { message: 'Contraseña incorrecta' });
         }
@@ -82,14 +102,15 @@ const initializedPassport = () => {
         return done(error);
       }
     }
-  ));
-
+  )); */
 
   passport.use('resetPassword', new localStrategy(
-    { passReqToCallback: true, usernameField: 'token' }, async (req, username, password, done) => {
+    { passReqToCallback: true, usernameField: 'email' }, async (req, res, password) => {
       const { token } = req.body
       try {
+        // Extrae el usuario desde el token
         const userId = extractToken(token);
+
         const user = await userModel.findOne({ _id: userId });
         if (!user) {
           return done(null, false, { message: 'Usuario no encontrado' });
@@ -97,19 +118,19 @@ const initializedPassport = () => {
 
         if (isMatch(password, user.password)) {
           console.log("La nueva contraseña es igual a la existente en la base de datos");
-          return done(null, false, { message: 'La contraseña ya existe en la base de datos' });
+          return res.status(400).json({ status: "error", error: "La contraseña ya existe en la base de datos" });
         }
-
-        // Actualizar la contraseña en la base de datos
+        // Hashea la nueva contrasñea
         const newHashedPassword = createHast(password);
+        //actualiza el modelo
         await userModel.updateOne({ _id: user._id }, { $set: { password: newHashedPassword } });
 
+        // redirecciona al login
         console.log('contraseña restablecida')
-
-        // Retorna el usuario actualizado (opcional)
-        return done(null, user);
+        redirectToLogin(req, res);
+        /* res.status(201).json({ status: "success", user }) */
       } catch (error) {
-        return done(error);
+        return error
       }
     }
   ));
