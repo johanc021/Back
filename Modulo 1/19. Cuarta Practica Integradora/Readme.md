@@ -82,6 +82,23 @@ solo se puede realizar el usuario tiene rol admin
 
 ---
 
+Peticion POST - actualizar documentos de usuario
+
+http://localhost:8080/api/user/:uid/documents
+
+enviar por Postman:
+
+uid -> id del usuari por params
+Por body -> form-data
+
+key imageProfile como File -> adjuntar pdf
+key imageProduct como File -> adjuntar pdf
+key document como File -> adjuntar pdf
+
+se guardaran los archivos en el directoro storage
+
+---
+
 Peticion Delete - Para eliminar un usuario
 
 http://localhost:8080/api/user/:uid
@@ -193,10 +210,12 @@ Estructura por body - postman:
 {
 "products": [
 {
-"product": "64b5f0ae4cff50135172ff30"
+"product": "6522e7c29440da5fa4ce32f1",
+"quantity": 15
 },
 {
-"product": "64b5f0ae4cff50135172ff22"
+"product": "6522e7c29440da5fa4ce32f2",
+"quantity": 36
 }
 ]
 }

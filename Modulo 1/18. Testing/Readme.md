@@ -193,10 +193,12 @@ Estructura por body - postman:
 {
 "products": [
 {
-"product": "64b5f0ae4cff50135172ff30"
+"product": "6522e7c29440da5fa4ce32f1",
+"quantity": 15
 },
 {
-"product": "64b5f0ae4cff50135172ff22"
+"product": "6522e7c29440da5fa4ce32f2",
+"quantity": 36
 }
 ]
 }

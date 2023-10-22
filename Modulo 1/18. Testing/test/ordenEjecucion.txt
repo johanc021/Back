@@ -1,0 +1,3 @@
+test/routers/sessions.router.test.js
+test/routers/users.router.test.js
+test/routers/products.router.test.js
